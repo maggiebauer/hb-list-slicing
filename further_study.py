@@ -62,8 +62,8 @@ def custom_append(input_list, value):
 
     """
 
-    #new_list = input_list + [value]
-    input_list.extend([value])
+    input_list[:] = input_list[:] + [value]
+
 
 
 def custom_extend(input_list, second_list):
@@ -82,7 +82,8 @@ def custom_extend(input_list, second_list):
 
     """
     for i in second_list:
-        custom_append(input_list,i)
+    	custom_append(input_list,i)
+   
 
 
 
@@ -100,8 +101,8 @@ def custom_insert(input_list, index, value):
         True
 
     """
-    for i in range(len(input_list)):
-        pass
+    # for i in range(len(input_list)):
+    input_list[index:index] = [value]
 
 
 
@@ -121,8 +122,13 @@ def custom_remove(input_list, value):
         True
 
     """
-
-    pass
+    index = 0
+    for i in input_list:
+    	if i == value:
+    		break 
+    	index +=1
+    
+    input_list[:] =input_list[:index] + input_list[index+1:]
 
 
 def custom_pop(input_list):
@@ -141,7 +147,7 @@ def custom_pop(input_list):
 
     """
     value = input_list[-1]
-    input_list = input_list[:-1]
+    input_list[:] = input_list[:-1]
     return value
 
 
@@ -248,10 +254,13 @@ def custom_equality(some_list, another_list):
         False
 
     """
+    if custom_len(some_list) != custom_len(another_list):
+    	return False
+    for i in range(custom_len(some_list)):
+    	if some_list[i] != another_list[i]:
+    		return False
 
-    return None
-
-
+    return True		
 ##############################################################################
 # Please ask for a code review. Also, give your partner a high-five!
 ##############################################################################
